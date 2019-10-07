@@ -53,8 +53,29 @@
 ```
 
 8. Parse the URL `http://localhost:3000/api/v3?token=8372fcb8y2874b2t478t6t48cbtbc72t4` using `url` module's parse method and write output in answer.js
+// Answer here ...
+  ```js
+Url {
+  protocol: 'http:',
+  slashes: true,
+  auth: null,
+  host: 'localhost:3000',
+  port: '3000',
+  hostname: 'localhost',
+  hash: null,
+  search: '?token=8372fcb8y2874b2t478t6t48cbtbc72t4',
+  query: 'token=8372fcb8y2874b2t478t6t48cbtbc72t4',
+  pathname: '/api/v3',
+  path: '/api/v3?token=8372fcb8y2874b2t478t6t48cbtbc72t4',
+  href:
+   'http://localhost:3000/api/v3?token=8372fcb8y2874b2t478t6t48cbtbc72t4' }
+```
+
 
 9. parse the query object as well from above url using `url.parse(url, true)` and output result in answer.js
+```js
+{ token: '8372fcb8y2874b2t478t6t48cbtbc72t4' }  
+```
 
 10. create a file `math.js`
   1. Export variables and functions
@@ -68,6 +89,23 @@ const pie = 3.14;
 function sum() {}
 function multiply() {}
 // export it from math.js
+// answer
+
+// math.js
+var pie = 3.14;
+function sum(a,b) {
+  return a+b;
+}
+function multiply(a,b) {
+  return a*b;
+}
+module.exports = {
+  pie,sum,multiply
+}
+
+// index.js
+var math = require("./math.js");
+console.log(math.pie, sum(1,2), multiply(2,3));
 ```
 
   2. Define above const and functions as properties and methods on module.exports object.
@@ -76,11 +114,12 @@ function multiply() {}
 ```js
   module.exports = {
     pie: 3.14,
-    add: () => {}
+    add: (a,b) => {return a+b},
+    multiply: (a,b) => {return a*b}
   }
 ```
   3. Define above using exports 
 
 ```js
-exports.sum = () => {}
+exports.sum = function(a,b) => {return a+b}
 ```
