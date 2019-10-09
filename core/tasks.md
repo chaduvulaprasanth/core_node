@@ -43,6 +43,25 @@
 6. What is blocking code ? How is it different from non-blocking/async codes ? Correct blocking code in index.js to run asynchronously ?
 // Answer here ...
   ```js
+  blokcing code means synchronus code, as node is single threaded which the code runs synchronusly one 
+  by one. if any line of code takes time, next line will wait untill the before line excution finishes.
+
+  non-blocking code means asynchronous code, so the asynchronous code takes call back functions and 
+  excutes in background and waits, once the reaminging code excution finishes, async code will run
+
+
+  example:
+
+  const fs = require("fs");
+
+  // blocking, synchronus way
+  const textin = fs.readFileSync("./txt/input.txt", "utf-8");
+  console.log(textin);
+
+  // Non- blocking, Asynchronus way
+  fs.readFile("./txt/start.txt", "utf-8", (err,data) => {
+      console.log(data);
+  })
 
   ```
 
