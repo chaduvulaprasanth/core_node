@@ -1,31 +1,84 @@
 var http = require('http');
-
+var fs = require("fs");
 // 1. Write script to create a basic http server using createServer method, write 'Welcome to NodeJS' as response and
 // listen for request on port 5555.
-
+var server = http.createServer((req,res) => {
+  res.end("server created successfully");
+})
+server.listen(5555, () => {
+  console.log("server successfully runs at 5555");
+})
 // 2. Write script to create a server, send in response the request headers 
 // and add listener on port 6666.
-
+var server2 = http.createServer((req,res) => {
+  res.end(req.headers);
+})
+server2.listen(6666, () => {
+  console.log("server successfully runs at 6666");
+})
 // 3. create a server and console request methods and url by doing request 
 // from postman or web browsers.
-
+var server = http.createServer((req,res) => {
+  console.log(req.url);
+  res.end("check your console");
+})
+server.listen(5555, () => {
+  console.log("server successfully runs at 5555");
+})
 // 4. create a server
   // - set response headers as 'text/html' using res.setHeader property.
   // - write some HTML content in response
   // - listen on port 6000
-
+  var server = http.createServer((req,res) => {
+    res.setHeader("Content-type", "text/html");
+    res.end("<h1>server runs successfully</h1>");
+  })
+  server.listen(5555, () => {
+    console.log("server successfully runs at 5555");
+  })
 // 5. create a server
   // - create a seperate file index.html and write some html content
   // - read the html file content and send it in response in createServer method
   // - don't forget to set header before writing to response
-
+  var server = http.createServer((req,res) => {
+    res.setHeader("Content-type", "text/html");
+    fs.readFile("./index.html", "utf-8", (err,data) => {
+      res.end(data);
+    })
+  })
+  server.listen(5555, () => {
+    console.log("server successfully runs at 5555");
+  })
 // 6. create a server
   // - create 3 diffenrent file ie. indx.html, about.html, contact.html
   // - inside createServer, handle different urls for serving different html file
   // - '/' route for index.html file
   // - "/about" for about.html file
   // - "/contact" for contact.html file
-
+  var server = http.createServer((req,res) => {
+    if(req.url === "/") {
+      res.setHeader("Content-type", "text/html");
+      fs.readFile("./index.html", "utf-8", (err,data) => {
+        res.end(data);
+      })
+    }
+    else if(req.url === "/about") {
+      res.setHeader("Content-type", "text/html");
+      fs.readFile("./about.html", "utf-8", (err,data) => {
+        res.end(data);
+      })
+    }
+    else if(req.url === "/contact") {
+      res.setHeader("Content-type", "text/html");
+      fs.readFile("./contact.html", "utf-8", (err,data) => {
+        res.end(data);
+      })
+    }
+    
+  })
+  server.listen(5555, () => {
+    console.log("server successfully runs at 5555");
+  })
 // 7. create an Server(echoServer)
   // handle post request for incoming data from postman using req as eventEmitter
   // send incoming data back in response
